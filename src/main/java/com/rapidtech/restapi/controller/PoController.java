@@ -1,5 +1,6 @@
 package com.rapidtech.restapi.controller;
 
+import com.rapidtech.restapi.model.CategoryModel;
 import com.rapidtech.restapi.model.PurchaseOrderModel;
 import com.rapidtech.restapi.model.ResponseModel;
 import com.rapidtech.restapi.service.PurchaseOrderService;
@@ -28,10 +29,19 @@ public class PoController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveCategory(@RequestBody PurchaseOrderModel request){
-        Optional<PurchaseOrderModel> result = poService.save(request);
-        return ResponseEntity.ok().body(
-                new ResponseModel(200,"SUCCESS", result)
-        );
+        try {
+            Optional<PurchaseOrderModel> result = poService.save(request);
+            return ResponseEntity.ok().body(
+                    new ResponseModel(200,"SUCCESS", result)
+            );
+        }catch (Exception e){
+            log.error("Error Save", e.getMessage());
+            return ResponseEntity.ok().body(
+                    new ResponseModel(200,"SUCCESS", "e")
+            );
+        }
+
+
     }
 
 }

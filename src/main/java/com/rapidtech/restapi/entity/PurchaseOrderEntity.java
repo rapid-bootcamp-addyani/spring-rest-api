@@ -65,12 +65,12 @@ public class PurchaseOrderEntity {
     @OneToMany(mappedBy = "category")
     private Set<ProductEntity> products = new HashSet<>();
 
-    public void addDetail(PurchaseOrderDetailEntity detailEntity){
+    private void addDetail(PurchaseOrderDetailEntity detailEntity){
         this.purchaseOrderDetails.add(detailEntity);
         detailEntity.setPurchaseOrder(this);
     }
 
-    public void addDetailList(List<PurchaseOrderDetailModel> details){
+    private void addDetailList(List<PurchaseOrderDetailModel> details){
         for(PurchaseOrderDetailModel item: details){
             PurchaseOrderDetailEntity detailEntity = new PurchaseOrderDetailEntity(item);
             addDetail(detailEntity);
@@ -83,6 +83,11 @@ public class PurchaseOrderEntity {
 //        this.shipperId = model.getShipperId();
 //        this.poDate = model.getPoDate();
 //    }
+//    public PurchaseOrderEntity(PurchaseOrderModel model, List<PurchaseOrderDetailModel> modelDetail) {
+//        BeanUtils.copyProperties(model, this);
+//        this.addDetailList(modelDetail);
+//    }
+
     public PurchaseOrderEntity(PurchaseOrderModel model) {
         BeanUtils.copyProperties(model, this);
     }

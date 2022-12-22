@@ -27,7 +27,7 @@ public class PurchaseOrderModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date poDate;
     private Double totalAmount;
-    private List<PurchaseOrderDetailModel> details;
+    private List<PurchaseOrderDetailModel> details = new ArrayList<>();
 
 
     public PurchaseOrderModel(PurchaseOrderEntity entity) {
